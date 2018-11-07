@@ -18,16 +18,16 @@ Please refer to the REST API spec to learn about the API: http://www.topcoder.co
 1. Integrate the Webapp with the backend REST API
 After the user is logged-in, it should save the jwtToken into the cookie, which will be used by the Chrome Extension. 
 New Document Page
- - upload button - call the /tone/profile/file API to upload the file and get the analysis result. Files with txt, doc and docx formats are supported, and the file content should be displayed in the editor on the page, with the analysis results displayed on the right. 
-text in editor - call the /tone/profile/text API to analyze the text in editor, and show the analysis results on the right. 
+ - upload button - call the ``` /tone/profile/file ``` API to upload the file and get the analysis result. Files with txt, doc and docx formats are supported, and the file content should be displayed in the editor on the page, with the analysis results displayed on the right. 
+text in editor - call the ```/tone/profile/text``` API to analyze the text in editor, and show the analysis results on the right. 
 For both cases, user can click the sentence tone to highlight the corresponding sentences in the editor
 - Tone Profile Page
-call the /tone/profile to get the user's tone profile.  Display different content depending upon the profile status. 
-none - display a static message
-in-progress - display the progress bar, and you should poll the api to get new progress and update the page, until the scanning is completed or failed.  If user clicks cancel-scan link, the /tone/profile/cancelScan API should be called to cancel the api, then you should call the /tone/profile again to display the results properly. 
+call the ```/tone/profile``` to get the user's tone profile.  Display different content depending upon the profile status. 
+none - display a static message in-progress - display the progress bar, and you should poll the api to get new progress and update the page, until the scanning is completed or failed.  If user clicks cancel-scan link, the /tone/profile/cancelScan API should be called to cancel the api, then you should call the /tone/profile again to display the results properly. 
+
 completed - display the full profile
 failed - display a static message
-scan button
+- Scan button
 the link should be disabled if the scanning is in-progress. The text should be "rescan" if the status is completed or failed, and should be "scan" by default. 
 when user clicks the button, you should call the /emailProvider/oauth API, if the response has a "redirect" field, it means the email-provider is not authorized. You need to open the URL in redirect in a current tab to perform the authorization; otherwise call the /tone/profile/scan endpoint to do the scanning. Then you should poll the /tone/profile endpoint to update the scanning progress
 - Registration Email Verification Page - this is a new page, the page should look like the current forgot-password page (except it won't have the email-input and cancel button, and the text should be changed to something like: "Your email is verified, please click the button below to login" or some error message if the token is invalid, and the Done button should be "Continue to Login". Its URL is used in the forgot-password email. 
